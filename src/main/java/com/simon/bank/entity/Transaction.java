@@ -27,12 +27,15 @@ public class Transaction {
     private Account accountTo;
 
     protected Transaction() {
-
     }
 
     public Transaction(double amount, Account accountFrom, Account accountTo) {
         this.amount      = amount;
         this.accountFrom = accountFrom;
         this.accountTo   = accountTo;
+    }
+
+    public String toString() {
+        return this.amount + " " + this.accountFrom.getId() + "->" + this.accountTo.getId();
     }
 }
