@@ -4,12 +4,15 @@ import com.simon.bank.entity.Account;
 import com.simon.bank.entity.Transaction;
 import com.simon.bank.repository.AccountRepo;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Positive;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Optional;
 
 @Service
 @Transactional
+@Validated
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepo accountRepo;
@@ -31,13 +34,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account deposit(double amount, Account account) {
+    public Account deposit(@Positive double amount, Account account) {
         account.deposit(amount);
         return this.accountRepo.save(account);
     }
 
     @Override
-    public Account withdraw(double amount, Account account) {
+    public Account withdraw(@Positive double amount, Account account) {
         account.withdraw(amount);
         return this.accountRepo.save(account);
     }

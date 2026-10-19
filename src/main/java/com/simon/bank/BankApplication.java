@@ -34,7 +34,7 @@ public class BankApplication {
             accountService.save(account1);
             accountService.save(account2);
 
-            accountService.deposit(100, account1);
+            accountService.deposit(-100, account1);
 
             Transaction transaction = new Transaction(30, account1, account2);
 
