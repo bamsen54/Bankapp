@@ -2,6 +2,7 @@ package com.simon.bank.service;
 
 import com.simon.bank.entity.Account;
 import com.simon.bank.entity.Transaction;
+import com.simon.bank.exception.InsufficientFundsException;
 import com.simon.bank.repository.AccountRepo;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Positive;
@@ -41,6 +42,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account withdraw(@Positive double amount, Account account) {
+
+        if(account.getBalance() < amount)
+            throw new InsufficientFundsException(account.getId(), amount);
+
         account.withdraw(amount);
         return this.accountRepo.save(account);
     }
