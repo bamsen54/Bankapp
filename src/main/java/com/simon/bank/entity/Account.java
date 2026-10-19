@@ -1,6 +1,7 @@
 package com.simon.bank.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,11 +26,11 @@ public class Account {
     public Account() {
     }
 
-    public void deposit(double amount) {
+    public void deposit(@Positive double amount) {
         this.balance += amount;
     }
 
-    public void withdraw(double amount) {
+    public void withdraw(@Positive double amount) {
         this.balance -= amount;
     }
 }
