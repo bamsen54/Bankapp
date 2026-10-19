@@ -30,16 +30,19 @@ public class BankApplication {
             AccountService accountService = context.getBean(AccountService.class);
 
             Account account1 = new Account();
-            account1.setBalance(100);
             Account account2 = new Account();
             accountService.save(account1);
             accountService.save(account2);
 
-            Transaction transaction = new Transaction(50, account1, account2);
+            accountService.deposit(100, account1);
 
-            accountService.transfer(transaction);
+            Transaction transaction = new Transaction(30, account1, account2);
 
+            accountService.createTransaction(transaction);
 
+            IO.println(accountService.findById(1L).get().getTransactions());
+            IO.println(account1.getBalance());
+            IO.println(account2.getBalance());
 
             IO.println("Application is running on port: " + port);
         };

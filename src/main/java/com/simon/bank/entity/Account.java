@@ -19,6 +19,17 @@ public class Account {
     @Column(name = "balance")
     private double balance = 0;
 
+    @OneToMany(mappedBy = "accountFrom", fetch = FetchType.EAGER)
+    List<Transaction> transactions = new ArrayList<>();
+
     public Account() {
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        this.balance -= amount;
     }
 }
